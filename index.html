@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+
+<body>
+<div class="logo">
+  <svg viewBox="0 0 178.51 101.85">
+    <path class="cls-1" d="m17.5,0h64.97l9.03,28L113.91,0h45.59c28.5,0,24.5,43-9,43h-34.24l6.74-29.5h17l-4,20h9c18,0,24-25,5-25h-26l-39,46-14-38c0,17-18,26-38,26H6L14,13.5h17l-5,20h9c16,0,25-25,7-25H15L17.5,0Z" />
+    <path class="cls-1" d="m84.5,55.5C37.83,55.5,0,60.65,0,67s37.83,11.5,84.5,11.5,84.5-5.15,84.5-11.5-37.83-11.5-84.5-11.5Zm0,17.5c-13.25,0-24-2.69-24-6s10.75-6,24-6,24,2.69,24,6-10.75,6-24,6Z" />
+    <g>
+      <path class="cls-1" d="m19.19,84.72h3.7l4.92,12.63,5.08-12.63h3.47l-7.3,16.71h-2.78l-7.09-16.71Z" />
+      <path class="cls-1" d="m49.7,84.72h3.21v16.71h-3.21v-16.71Z" />
+      <path class="cls-1" d="m68.35,84.72h7.12c1.19,0,2.34.17,3.44.51,1.11.34,2.08.85,2.93,1.55s1.53,1.56,2.04,2.61c.51,1.05.77,2.28.77,3.69s-.29,2.67-.88,3.72c-.59,1.05-1.34,1.91-2.27,2.6-.93.68-1.96,1.2-3.09,1.53-1.13.34-2.24.51-3.33.51h-6.74v-16.71Zm5.61,14.02c1,0,1.95-.11,2.84-.32.89-.21,1.67-.54,2.33-.99.66-.45,1.19-1.03,1.57-1.75.38-.72.57-1.58.57-2.61s-.17-1.87-.51-2.6c-.34-.72-.81-1.31-1.42-1.76-.6-.45-1.32-.78-2.14-.99-.83-.21-1.73-.32-2.72-.32h-2.93v11.33h2.4Z" />
+      <path class="cls-1" d="m99.19,84.72h11.97v2.69h-8.75v4.11h8.29v2.69h-8.29v4.53h9.21v2.69h-12.42v-16.71Z" />
+      <path class="cls-1" d="m125.29,93.15c0-1.34.24-2.55.71-3.65.48-1.09,1.14-2.03,1.98-2.8.84-.77,1.85-1.37,3.01-1.78s2.44-.62,3.84-.62,2.68.2,3.87.61,2.2,1,3.05,1.76c.85.76,1.51,1.68,1.99,2.76.48,1.08.71,2.29.71,3.62s-.24,2.5-.71,3.58c-.48,1.08-1.14,2.01-1.99,2.79-.85.78-1.87,1.38-3.05,1.8-1.18.43-2.47.64-3.87.64s-2.67-.21-3.84-.62c-1.17-.42-2.17-1.01-3.01-1.77-.84-.76-1.5-1.68-1.98-2.75-.48-1.07-.71-2.26-.71-3.56Zm3.37-.19c0,.9.15,1.72.45,2.48.3.75.72,1.41,1.26,1.96.54.55,1.19.98,1.95,1.3.76.31,1.6.47,2.54.47s1.79-.16,2.55-.47c.77-.32,1.42-.75,1.96-1.3.54-.55.96-1.2,1.26-1.96.3-.76.45-1.58.45-2.48,0-.83-.15-1.61-.45-2.34-.3-.72-.72-1.36-1.26-1.9-.54-.54-1.2-.97-1.96-1.27-.77-.31-1.62-.46-2.55-.46s-1.78.15-2.54.46-1.41.73-1.95,1.27-.97,1.18-1.26,1.9c-.3.72-.45,1.5-.45,2.34Z" />
+    </g>
+  </svg>
+</div>
+
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #212121;
+  overflow: hidden;
+}
+.cls-1 {
+  fill: #cc87d4;
+}
+.logo {
+  position: absolute;
+  width: 150px;
+  height: 87px;
+  left: calc(50dvw - 75px);
+  top: calc(50dvh - 44px);
+}
+
+</style>
+
+<script>
+const logo = document.querySelector(".logo");
+const logoColor = document.querySelectorAll(".cls-1");
+let width = window.innerWidth;
+let height = window.innerHeight;
+
+const directions = [
+  { Hor: 1, Ver: 1 },
+  { Hor: 1, Ver: -1 },
+  { Hor: -1, Ver: 1 },
+  { Hor: -1, Ver: -1 }
+];
+
+// Random Spawn
+const spawnPoint = [
+  Math.ceil(Math.random() * (width - 150)),
+  Math.ceil(Math.random() * (height - 87))
+];
+let logoLeft = spawnPoint[0];
+let logoTop = spawnPoint[1];
+logo.style.left = `${logoLeft}px`;
+logo.style.top = `${logoTop}px`;
+
+// Random Direction
+const direction = directions[Math.ceil(Math.random() * 3)];
+
+// Update View Size
+window.addEventListener("resize", () => {
+  width = window.innerWidth;
+  height = window.innerHeight;
+});
+
+// Keep it Moving
+const movement = setInterval(() => {
+  logoLeft += direction.Hor;
+  logoTop += direction.Ver;
+  logo.style.left = `${logoLeft}px`;
+  logo.style.top = `${logoTop}px`;
+  if (logoLeft < 0 || logoLeft > width - 150) {
+    const randomColor = randomColorGenerator();
+    direction.Hor *= -1;
+    logoColor.forEach((part) => {
+      part.style.fill = `#${randomColor}`;
+    });
+  }
+  if (logoTop < 0 || logoTop > height - 87) {
+    const randomColor = randomColorGenerator();
+    direction.Ver *= -1;
+    logoColor.forEach((part) => {
+      part.style.fill = `#${randomColor}`;
+    });
+  }
+}, 10);
+
+// Random Color Generator
+const randomColorGenerator = () => {
+  return Math.floor(Math.random() * 16777215).toString(16);
+};
+
+</script>
+</body>
+<html>
